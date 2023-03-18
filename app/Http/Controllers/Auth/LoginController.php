@@ -40,6 +40,9 @@ class LoginController extends Controller
 
     public function login(Request $request) {
         $p_usuario = base64_decode($request->get('id'));
+        // $p_usuario = $request->get('usuario');
+        // $p_password = $request->get('password');
+        
         $m_usuario = new Usuario();
 
         try {

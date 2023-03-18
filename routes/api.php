@@ -16,20 +16,10 @@ use App\Http\Controllers\AplicacionController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('/login', [LoginController::class, 'login'])->name('login');
 
-Route::get("/hello", function () {
-    return "Hello World";
-});
-
-Route::group(['middleware' => 'cors'], function() {
-    Route::post('/login', [LoginController::class, 'login'])->name('login');
-
-    Route::get('/aplicacion/getAplicacionesFull', [AplicacionController::class, 'getAplicacionesFull']);
-    Route::post('/aplicacion/getAplicaciones', [AplicacionController::class, 'getAplicaciones']);
-    Route::post('/aplicacion/crearAplicaciones', [AplicacionController::class, 'crearAplicaciones']);
-    Route::post('/aplicacion/actualizarAplicaciones', [AplicacionController::class, 'actualizarAplicaciones']);
-    Route::get('/aplicacion/getTipoAplicaciones', [AplicacionController::class, 'getTipoAplicaciones']);
-});
+Route::get('/aplicacion/getAplicacionesFull', [AplicacionController::class, 'getAplicacionesFull']);
+Route::post('/aplicacion/getAplicaciones', [AplicacionController::class, 'getAplicaciones']);
+Route::post('/aplicacion/crearAplicaciones', [AplicacionController::class, 'crearAplicaciones']);
+Route::post('/aplicacion/actualizarAplicaciones', [AplicacionController::class, 'actualizarAplicaciones']);
+Route::get('/aplicacion/getTipoAplicaciones', [AplicacionController::class, 'getTipoAplicaciones']);
