@@ -30,9 +30,8 @@ class Saml2LoginListener
         $samlAttributes = $saml2User->getAttributes();
         $userData = array(
             'id' => $saml2User->getUserId(),
+            'fullname' => $samlAttributes['FullName'][0],
             'email' => $samlAttributes['Email'][0],
-            'firstname' => $samlAttributes['Firstname'][0],
-            'lastname' => $samlAttributes['Lastname'][0],
             'assertion' => $saml2User->getRawSamlAssertion(),
             'sessionIndex' => $saml2User->getSessionIndex(),
             'nameId' => $saml2User->getNameId()
@@ -45,8 +44,7 @@ class Saml2LoginListener
         if ($user == null) {
             $user = new \App\Models\Usuario;
             $user->usuario = $userData['id'] == null ? null : $userData['id'];
-            $user->nombres = $userData['firstname'] == null ? null : $userData['firstname'];
-            $user->apellidos = $userData['lastname'] == null ? null : $userData['lastname'];
+            $user->nombre_completo = $userData['fullname'];
             $user->email = $userData['email'] == null ? null : $userData['email'];
             $user->activo = 'S';
             $user->crear_usuario($user);            

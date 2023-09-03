@@ -21,7 +21,7 @@ class Aplicacion extends Model
 
     // Crear/Actuallizar
     public function crud_aplicaciones(Request $request, $evento) {
-        $db = DB::select("exec pr_crud_app_aplicaciones ?,?,?,?,?,?,?,?,?,?,?,?", 
+        $db = DB::select("exec pr_crud_app_aplicaciones ?,?,?,?,?,?,?,?,?,?,?", 
                         [
                             $evento,
                             $request->input('aplicacion_id'),
@@ -33,8 +33,7 @@ class Aplicacion extends Model
                             $request->input('logo'),
                             $request->input('saml') == true ? 'S' : 'N',
                             $request->input('activo') == true ? 'S' : 'N',
-                            $request->input('usuario_creador'),
-                            $request->input('usuario_modificador')
+                            $request->input('usuario')
                         ]);
         return $db;
     }

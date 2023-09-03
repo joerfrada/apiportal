@@ -20,14 +20,13 @@ class UsuarioMenu extends Model
     ];
 
     public function crud_usuarios_menu(Request $request, $evento) {
-        $db = DB::select("exec pr_crud_app_usuarios_menu ?,?,?,?,?,?",
+        $db = DB::select("exec pr_crud_app_usuarios_menu ?,?,?,?,?",
                         [
                             $evento,
                             $request->input('usuario_menu_id'),
                             $request->input('usuario_id'),
                             $request->input('menu_id'),
-                            $request->input('usuario_creador'),
-                            $request->input('usuario_modificador')
+                            $request->input('usuario')
                         ]);
         return $db;
     }

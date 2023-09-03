@@ -16,11 +16,11 @@ class Menu extends Model
     protected $primaryKey = 'menu_id';
 
     protected $fillable = [
-        'menu_nombre,tipo,menu_padre_id,icono,tooltip,url,activo'
+        'menu_nombre,tipo,menu_padre_id,icono,tooltip,url,activo,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
     ];
 
     public function crud_menus(Request $request, $evento) {
-        $db = DB::select("exec pr_crud_app_menu ?,?,?,?,?,?,?,?,?,?,?",
+        $db = DB::select("exec pr_crud_app_menu ?,?,?,?,?,?,?,?,?,?",
                         [
                             $evento,
                             $request->input('menu_id'),
@@ -31,8 +31,7 @@ class Menu extends Model
                             $request->input('tooltip'),
                             $request->input('url'),
                             $request->input('activo') == true ? 'S' : 'N',
-                            $request->input('usuario_creador'),
-                            $request->input('usuario_modificador')
+                            $request->input('usuario')
                         ]);
         return $db;
     }

@@ -16,30 +16,28 @@ class Usuario extends Authenticatable
     protected $primaryKey = 'usuario_id';
 
     protected $fillable = [
-        'usuario,activo,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
+        'usuario,nombre_completo,activo,usuario_creador,fecha_creacion,usuario_modificador,fecha_modificacion'
     ];
 
     public function crud_usuarios(Request $request, $evento) {
-        $db = DB::select("exec pr_crud_app_usuarios ?,?,?,?,?,?,?,?,?",
+        $db = DB::select("exec pr_crud_app_usuarios ?,?,?,?,?,?,?",
                         [
                             $evento,
                             $request->input('usuario_id'),
                             $request->input('usuario'),
-                            $request->input('nombres'),
-                            $request->input('apellidos'),
+                            $request->input('nombre_completo'),
                             $request->input('email'),
                             $request->input('activo') == true ? 'S' : 'N',
-                            $request->input('usuario_creador'),
-                            $request->input('usuario_modificador')
+                            $request->input('usuario1')
                         ]);
         return $db;
     }
 
     public function crear_usuario(Usuario $user) {
-        $db = DB::insert("insert into tb_app_usuarios (usuario,nombres,apellidos,email,activo,usuario_creador) values (?,?,?,?,?,?)", 
+        $db = DB::insert("insert into tb_app_usuarios (usuario,nombre_completo,email,activo,usuario_creador) values (?,?,?,?,?)", 
                         [
                             $user->usuario,
-                            $user->nombres,
+                            $user->nombre_completo,
                             $user->apellidos,
                             $user->email,
                             $user->activo,
